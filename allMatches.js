@@ -12,12 +12,13 @@ function dirCreator(src){
     }
 }
 let j = 1;
+let teamName;
 function cb(err, response, html) {
     let chSelector = cheerio.load(html);
     let tables = chSelector(".table.batsman");
     let teams = chSelector(".event .teams .name");
     for(let i = 0 ; i < 2 ; i++){
-        let teamName = chSelector(teams[i]).text();
+        teamName = chSelector(teams[i]).text();
         const pathOfFolder = path.join(__dirname,'\\IPL',teamName);
         dirCreator(pathOfFolder);
     }
@@ -50,8 +51,9 @@ function cb(err, response, html) {
                 let filePath = path.join(__dirname,'\\IPL',);
                 let playerTeam = chSelector(".header-title.label").text();
                 for(let k = 0 ; k < 2 ; k++){
-                    console.log(playerTeam[k]);
+                    //console.log(playerTeam[k]);
                 }
+                console.log(teamName);
                 
 
                 
