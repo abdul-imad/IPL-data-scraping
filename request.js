@@ -9,10 +9,8 @@ request("https://www.espncricinfo.com/series/ipl-2020-21-1210595/match-results",
 function iplFol(src) {
     if(fs.existsSync(src) == false){
         fs.mkdirSync(src);
-        //console.log(src);
     }
 }
-let arr = [];
 function cb(err, response, html){
     if(err){
         console.error(err);
@@ -22,7 +20,6 @@ function cb(err, response, html){
         iplFol(IPLFolder);
         let cheerioSelector = cheerio.load(html);
         let buttons = cheerioSelector(".btn.btn-sm.btn-outline-dark.match-cta");
-        //console.log(buttons.length);
         for(let i = 2 ; i < buttons.length ; i += 4){
             let scoreCardLink = cheerioSelector(buttons[i]).attr("href").trim();
             let fullLink = "https://www.espncricinfo.com" + scoreCardLink;
