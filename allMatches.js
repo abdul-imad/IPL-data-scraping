@@ -11,16 +11,15 @@ function dirCreator(src){
         fs.mkdirSync(src);
     }
 }
+let j = 1;
 function cb(err, response, html) {
     let chSelector = cheerio.load(html);
     let tables = chSelector(".table.batsman");
     let teams = chSelector(".event .teams .name");
     for(let i = 0 ; i < 2 ; i++){
         let teamName = chSelector(teams[i]).text();
-        let pathOfFolder = path.join(__dirname,teamName);
+        const pathOfFolder = path.join(__dirname,'\\IPL',teamName);
         dirCreator(pathOfFolder);
-        //console.log( j ,teamName);
-        
     }
     for (let i = 0; i < tables.length; i++) {
         let teamBowlers = chSelector(tables[i]).find("tr");
@@ -47,16 +46,23 @@ function cb(err, response, html) {
                     SR : strikeRate
                 }
                 arr.push(playerObj);
+                let fileName = playerName;
+                let filePath = path.join(__dirname,'\\IPL',);
+                let playerTeam = chSelector(".header-title.label").text();
+                for(let k = 0 ; k < 2 ; k++){
+                    console.log(playerTeam[k]);
+                }
+                
 
                 
             }
         }
-        console.table(arr);
+        //console.table(arr);
         
     }
 
 }
 
-// module.exports = {
-//     matches : matches
-// }
+module.exports = {
+    matches : matches
+}
